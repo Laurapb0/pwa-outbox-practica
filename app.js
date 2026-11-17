@@ -1,4 +1,6 @@
 if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+
     navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.tipo === 'OUTBOX_SINCRONIZADO') {
             console.log('[UI] Confirmación recibida del Service Worker. Actualizando bandeja...');
