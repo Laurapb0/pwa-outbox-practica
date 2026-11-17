@@ -1,3 +1,13 @@
 h1{
     color: #ffffff;
 }
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: #fff;
+}
+
+.badge.online { background: #4386a0; }
+.badge.offline { background: #d88d15; }

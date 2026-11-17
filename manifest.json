@@ -1,0 +1,14 @@
+{
+    "name": "Bandeja Offline de Reportes",
+    "short_name": "Reportes",
+    "description": "Reportes de campo que se guardan sin conexión y se envían al volver la red.",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "theme_color": "#00695c",
+    "background_color": "#e0f2f1",
+    "icons": [
+        { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png" }
+    ]
+}

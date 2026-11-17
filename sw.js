@@ -1,10 +1,23 @@
-importScripts('./db-helper.js')
 
 // Definición de contenedores versionados y límites
-const CACHE_STATIC_NAME = 'static-v1';
-const CACHE_DYNAMIC_NAME = 'dynamic-v1';
+const CACHE_STATIC_NAME = 'static-v2';
+const CACHE_DYNAMIC_NAME = 'dynamic-v2';
 const DYNAMIC_LIMIT = 5; // Límite máximo de elementos en caché dinámica
 const TTL_MAX_SECONDS = 30; // Tiempo de vida máximo de 30 segundos para pruebas
+
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_STATIC_NAME).then((cache) => cache.addAll([
+            './',
+            './index.html',
+            './app.js',
+            './db-helper.js',
+            './styles.css',
+            './manifest.json'
+        ]
+        ))
+    );
+});
 
 self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
@@ -110,7 +123,8 @@ function cacheFirstEvolucionado(request) {
                                     return respuestaConTimestamp;
                                 });
                         });
-                });
+                })
+                .catch(() => respuestaCache);
         });
 }
 
@@ -148,7 +162,7 @@ function networkFirstEvolucionado(request) {
                             error: true,
                             mensaje: "La conexión falló y los datos locales han expirado o no existen."
                         }),
-                        {  headers: { 'Content-Type': 'application/json' } }
+                        { status: 400, headers: { 'Content-Type': 'application/json' } }
                     );
                 });
         });
